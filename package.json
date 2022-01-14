@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "deploy": "ng build --prod --base-href https://baltzarmattsson.github.io/bkk-converter/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
