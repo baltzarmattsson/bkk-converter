@@ -1,0 +1,34 @@
+.wf-file-input-container > * {
+	margin-bottom: 0;
+}
+
+.wf-file-drop-zone {
+	flex: 1 0 90px;
+	border: 2px dashed lightblue;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: center;
+	border-radius: 3px;
+	transition: background-color 0.3s;
+
+	&.active {
+		cursor: pointer;
+	}
+
+	&.complete {
+		background-color: rgba(0, 128, 0, 0.336);
+		color: white;
+
+		i {
+			margin-top: -1px;
+			margin-left: -36px;
+		}
+	}
+}
+
+.wf-file-manual {
+	input {
+		margin-top: 10px;
+	}
+}

@@ -1,0 +1,28 @@
+<div class="wf-file-input-container flex flex-col">
+    <div
+        class="wf-file-drop-zone {{randomClassId}}"
+        [class.active]="dragZoneActive"
+        [class.complete]="fileIsSet"
+    >
+        <p *ngIf="!fileIsSet">
+            Drop {{multiple ? 'files' : 'file'}}
+            <span *ngIf="!allowAllFiles">({{acceptedFileExtensionsFormatted}})</span>
+        </p>
+        <div
+            *ngIf="fileIsSet"
+            class="flex flex-row items-center"
+        >
+            <i class="mdi mdi-check mdi-36px"></i>
+            <span style="white-space: pre;">{{currentFileInfo}}</span>
+        </div>
+    </div>
+    <div class="wf-file-manual">
+        <input
+            wfInput
+            type="file"
+            (input)="onManualFileSelect($event)"
+            [accept]="allowAllFiles ? null : acceptedFileExtensionsFormatted"
+            [multiple]="multiple"
+        >
+    </div>
+</div>
