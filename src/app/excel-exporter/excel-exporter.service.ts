@@ -18,6 +18,7 @@ export class ExcelExporterService {
 		let wb = new Excel.Workbook();
 		const sheet = wb.addWorksheet("Data");
 		sheet.columns = [
+			{ header: "Projektnummer", key: "projektnummer", width: 30 },
 			{ header: "Projektnamn", key: "namn", width: 30 },
 			{ header: "Uppgiftsnamn", key: "uppgift", width: 30 },
 			{ header: "Arbetad tid", key: "arb", width: 30 },
@@ -28,7 +29,8 @@ export class ExcelExporterService {
 		projects.forEach(p => {
 			p.taks.forEach(task => {
 				sheet.addRow([
-					p.name,
+					p.projectNumber,
+					p.projectName,
 					task.name,
 					task.arbetadTid,
 					task.debiterbarTid,

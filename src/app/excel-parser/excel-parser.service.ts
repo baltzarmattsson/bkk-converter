@@ -6,8 +6,6 @@ import * as Excel from 'exceljs';
 })
 export class ExcelParserService {
 
-	constructor() { }
-
 	async parse(excelFile: File) {
 		let pr = await this.loadExcelFile(excelFile);
 		let groups: Excel.Row[][] = [];
@@ -37,9 +35,13 @@ export class ExcelParserService {
 		let projects: ProjectInfo[] = [];
 
 		for (let group of groups) {
+
+			const { projectNumber, projectName } = this.parseProjectNumberAndName(group[0].getCell(1).value as string);
+
 			// Get project name
 			let proj: ProjectInfo = {
-				name: group[0].getCell(1).value as string,
+				projectNumber,
+				projectName,
 				taks: []
 			}
 			projects.push(proj);
@@ -62,6 +64,18 @@ export class ExcelParserService {
 		return projects;
 	}
 
+	/**
+	 * 
+	 * @param original is in the format of "123 - PROJECTNAME" or "214-49 PROJECTNAME"
+	 */
+	private parseProjectNumberAndName(original: string) {
+		let projectNumber = original.split(" - ")[0];
+		let projectName = original.substring(projectNumber.length + " - ".length);
+		return {
+			projectNumber, projectName
+		}
+	}
+
 	private async loadExcelFile(excelFile: File): Promise<Excel.Worksheet> {
 		let workbook = new Excel.Workbook();
 		let buffer = await excelFile.arrayBuffer();
@@ -69,7 +83,8 @@ export class ExcelParserService {
 	}
 }
 export interface ProjectInfo {
-	name: string;
+	projectNumber: string;
+	projectName: string;
 	taks: ProjectTask[];
 }
 export interface ProjectTask {
