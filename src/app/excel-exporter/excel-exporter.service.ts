@@ -70,9 +70,9 @@ export class ExcelExporterService {
 	}
 
 	private saveAsExcelFile(buffer: any, fileName: string) {
-		fileName = "PARSED " + fileName;
 		const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
 		fileName = this.convertStringToFileFriendlyName(fileName);
+		console.log("saving as filename?", fileName);
 		FileSaver.saveAs(data, fileName + EXCEL_EXTENSION);
 	}
 

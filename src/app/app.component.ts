@@ -20,7 +20,7 @@ export class AppComponent {
 		this.fileControl.valueChanges.subscribe(async (file: File) => {
 			if (file) {
 				let res = await this.excelParser.parse(file);
-				await this.exporter.export(file.name, res)
+				await this.exporter.export("projektrapport", res)
 			}
 		})
 	}
